@@ -14,6 +14,7 @@ const SuccessInfoCard: React.FC<SuccessInfoCardProps> = ({
   numberOfTicket,
   formatTimestamp,
 }) => {
+  
   return (
     <View style={styles.infoCard}>
       {/* Terminal Info */}

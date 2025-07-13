@@ -30,7 +30,7 @@ export const useScan = () => {
 
       if (isMounted.current) {
         setNumberOfTicket(response.numberOfTicket || 0);
-        setSuccess(response.success);
+        setSuccess(response.success ?? true);
 
         if (!response.success) {
           setErrorMessage(response.message || "Có lỗi xảy ra");

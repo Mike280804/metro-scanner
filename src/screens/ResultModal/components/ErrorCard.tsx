@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ErrorCard;
+export default React.memo(ErrorCard);

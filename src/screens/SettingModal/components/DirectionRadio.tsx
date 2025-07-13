@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -11,22 +11,25 @@ const DirectionRadio: React.FC<DirectionRadioProps> = ({
   selectedDirection,
   onSelectDirection,
 }) => {
-  const directions = [
-    {
-      value: "in" as const,
-      label: "Vào ga",
-      description: "Hành khách vào ga tàu",
-      icon: "enter-outline" as const,
-      color: "#10b981",
-    },
-    {
-      value: "out" as const,
-      label: "Ra ga",
-      description: "Hành khách ra khỏi ga tàu",
-      icon: "exit-outline" as const,
-      color: "#ef4444",
-    },
-  ];
+  const directions = useMemo(
+    () => [
+      {
+        value: "in" as const,
+        label: "Vào ga",
+        description: "Hành khách vào ga tàu",
+        icon: "enter-outline" as const,
+        color: "#10b981",
+      },
+      {
+        value: "out" as const,
+        label: "Ra ga",
+        description: "Hành khách ra khỏi ga tàu",
+        icon: "exit-outline" as const,
+        color: "#ef4444",
+      },
+    ],
+    []
+  );
 
   return (
     <View style={styles.radioContainer}>
@@ -147,4 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DirectionRadio;
+export default React.memo(DirectionRadio);

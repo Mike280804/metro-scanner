@@ -28,15 +28,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           {primaryText || defaultPrimaryText}
         </Text>
       </TouchableOpacity>
-
-      {/* {!success && onClose && (
-        <TouchableOpacity style={styles.secondaryButton} onPress={onClose}>
-          <Ionicons name="close" size={20} color="#075985" />
-          <Text style={styles.secondaryButtonText}>
-            {secondaryText || "Đóng"}
-          </Text>
-        </TouchableOpacity>
-      )} */}
     </View>
   );
 };
@@ -81,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ActionButtons;
+export default React.memo(ActionButtons);

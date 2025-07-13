@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -34,8 +34,8 @@ const ResultModal: React.FC<ResultModalProps> = ({
   onClose,
   onScanAgain,
 }) => {
-  const [slideAnim] = useState(new Animated.Value(height));
-  const [scaleAnim] = useState(new Animated.Value(0));
+  const slideAnim = useRef(new Animated.Value(height)).current;
+  const scaleAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (visible) {
@@ -72,7 +72,7 @@ const ResultModal: React.FC<ResultModalProps> = ({
     }
   }, [visible]);
 
-  const formatTimestamp = (timestamp: Date) => {
+  const formatTimestamp = useCallback((timestamp: Date) => {
     return timestamp.toLocaleString("vi-VN", {
       year: "numeric",
       month: "2-digit",
@@ -81,7 +81,7 @@ const ResultModal: React.FC<ResultModalProps> = ({
       minute: "2-digit",
       second: "2-digit",
     });
-  };
+  }, []);
 
   return (
     <Modal
@@ -104,7 +104,6 @@ const ResultModal: React.FC<ResultModalProps> = ({
             },
           ]}
         >
-      
           {/* Content */}
           <ScrollView
             style={styles.modalContent}
@@ -187,4 +186,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ResultModal;
+export default React.memo(ResultModal);

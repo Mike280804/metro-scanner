@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InfoSection;
+export default React.memo(InfoSection);

@@ -253,4 +253,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TerminalDropdown;
+export default React.memo(TerminalDropdown);

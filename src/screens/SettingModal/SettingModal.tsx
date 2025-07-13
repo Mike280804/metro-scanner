@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -41,7 +41,7 @@ const SettingModal: React.FC<SettingModalProps> = ({
     currentDirection
   );
   const [showTerminalDropdown, setShowTerminalDropdown] = useState(false);
-  const [slideAnim] = useState(new Animated.Value(height));
+  const slideAnim = useRef(new Animated.Value(height)).current;
 
   React.useEffect(() => {
     if (visible) {
@@ -61,21 +61,21 @@ const SettingModal: React.FC<SettingModalProps> = ({
     }
   }, [visible]);
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     if (selectedTerminal && selectedDirection) {
       onSave(selectedTerminal, selectedDirection);
       onClose();
     }
-  };
+  }, [selectedTerminal, selectedDirection, onSave, onClose]);
 
-  const handleTerminalSelect = (terminal: Terminal) => {
+  const handleTerminalSelect = useCallback((terminal: Terminal) => {
     setSelectedTerminal(terminal);
     setShowTerminalDropdown(false);
-  };
+  }, []);
 
-  const handleToggleDropdown = () => {
-    setShowTerminalDropdown(!showTerminalDropdown);
-  };
+  const handleToggleDropdown = useCallback(() => {
+    setShowTerminalDropdown((prev) => !prev);
+  }, []);
 
   useEffect(() => {
     if (visible) {
@@ -279,4 +279,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingModal;
+export default React.memo(SettingModal);

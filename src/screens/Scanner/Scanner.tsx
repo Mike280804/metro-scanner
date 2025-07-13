@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 import {
   StyleSheet,
   Text,
@@ -48,7 +54,7 @@ const Scanner = () => {
         await requestPermission();
       }
     })();
-  }, [permission]);
+  }, [permission, requestPermission]);
 
   const handleBarCodeScanned = async ({ data }: { data: string }) => {
     if (scanned) return;
@@ -80,29 +86,29 @@ const Scanner = () => {
     setCurrentDirection(direction);
   };
 
-  const handleScanAgain = () => {
+  const handleScanAgain = useCallback(() => {
     setShowResultModal(false);
     setScanned(false);
     setCurrentScanData(null);
-  };
+  }, []);
 
-  const handleCloseResultModal = () => {
+  const handleCloseResultModal = useCallback(() => {
     setShowResultModal(false);
     setScanned(false);
     setCurrentScanData(null);
-  };
+  }, []);
 
-  const toggleCameraFacing = () => {
+  const toggleCameraFacing = useCallback(() => {
     setFacing((current) => (current === "back" ? "front" : "back"));
-  };
+  }, []);
 
-  const toggleFlash = () => {
+  const toggleFlash = useCallback(() => {
     setFlashMode((current) => (current === "off" ? "on" : "off"));
-  };
+  }, []);
 
-  const resetScanner = () => {
+  const resetScanner = useCallback(() => {
     setScanned(false);
-  };
+  }, []);
 
   if (!permission) {
     return (

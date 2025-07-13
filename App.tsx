@@ -1,6 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./src/navigation/StackNavigator";
+import { Buffer } from "buffer";
+
+global.Buffer = Buffer;
 
 export default function App() {
   return (
